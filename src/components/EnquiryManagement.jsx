@@ -52,17 +52,17 @@ export default function EnquiryManagement({ setView }) {
   };
 
   return (
-    <div className="p-6 space-y-6 bg-slate-50 dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-100 transition-colors duration-200">
+    <div className="p-4 sm:p-6 space-y-6 bg-slate-50 dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-100 transition-colors duration-200">
 
       {/* Page Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800 dark:text-white">Enquiry Management</h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">Dashboard &gt; Enquiry Management</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">Enquiry Management</h1>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Dashboard &gt; Enquiry Management</p>
         </div>
         <button
           onClick={() => setView('add-enquiry')}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 shadow-sm transition"
+          className="w-full sm:w-auto justify-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 shadow-sm transition"
         >
           <UserPlus size={16} />
           Add New Enquiry
@@ -70,25 +70,25 @@ export default function EnquiryManagement({ setView }) {
       </div>
 
       {/* 4 Metric Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-100 dark:border-slate-700/60 shadow-sm transition-colors">
-          <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Total Enquiries</p>
-          <h3 className="text-2xl font-bold text-slate-800 dark:text-white mt-1">{totalEnquiries}</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-xl border border-slate-100 dark:border-slate-700/60 shadow-sm transition-colors">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Total Enquiries</p>
+          <h3 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white mt-1">{totalEnquiries}</h3>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-100 dark:border-slate-700/60 shadow-sm transition-colors">
-          <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">New Leads</p>
-          <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mt-1">{newLeads}</h3>
+        <div className="bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-xl border border-slate-100 dark:border-slate-700/60 shadow-sm transition-colors">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">New Leads</p>
+          <h3 className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400 mt-1">{newLeads}</h3>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-100 dark:border-slate-700/60 shadow-sm transition-colors">
-          <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Contacted</p>
-          <h3 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">{contactedLeads}</h3>
+        <div className="bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-xl border border-slate-100 dark:border-slate-700/60 shadow-sm transition-colors">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Contacted</p>
+          <h3 className="text-xl sm:text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">{contactedLeads}</h3>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-100 dark:border-slate-700/60 shadow-sm transition-colors">
-          <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Follow Ups</p>
-          <h3 className="text-2xl font-bold text-amber-600 dark:text-amber-400 mt-1">{followUpLeads}</h3>
+        <div className="bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-xl border border-slate-100 dark:border-slate-700/60 shadow-sm transition-colors">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Follow Ups</p>
+          <h3 className="text-xl sm:text-2xl font-bold text-amber-600 dark:text-amber-400 mt-1">{followUpLeads}</h3>
         </div>
       </div>
 
@@ -96,31 +96,31 @@ export default function EnquiryManagement({ setView }) {
       <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200/80 dark:border-slate-700/60 shadow-sm overflow-hidden transition-colors">
 
         {/* Filters Header Bar */}
-        <div className="p-4 border-b border-slate-200 dark:border-slate-700/60 flex flex-wrap items-center justify-between gap-4 bg-slate-50/50 dark:bg-slate-800/80">
-          <div className="relative w-72">
+        <div className="p-4 border-b border-slate-200 dark:border-slate-700/60 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50 dark:bg-slate-800/80">
+          <div className="relative w-full md:w-72">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 dark:text-slate-500">
               <Search size={16} />
             </span>
             <input
               type="text"
               placeholder="Search by name, email, mobile..."
-              className="w-full pl-9 pr-4 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500"
+              className="w-full pl-9 pr-4 py-2 md:py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
 
-          <div className="flex items-center gap-3">
-            <select className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-1.5 text-xs text-slate-600 dark:text-slate-300 focus:outline-none">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <select className="flex-1 sm:flex-none bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-2 md:p-1.5 text-xs text-slate-600 dark:text-slate-300 focus:outline-none">
               <option>All Sources</option>
             </select>
-            <select className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-1.5 text-xs text-slate-600 dark:text-slate-300 focus:outline-none">
+            <select className="flex-1 sm:flex-none bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-2 md:p-1.5 text-xs text-slate-600 dark:text-slate-300 focus:outline-none">
               <option>All Courses</option>
             </select>
-            <select className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-1.5 text-xs text-slate-600 dark:text-slate-300 focus:outline-none">
+            <select className="flex-1 sm:flex-none bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-2 md:p-1.5 text-xs text-slate-600 dark:text-slate-300 focus:outline-none">
               <option>All Status</option>
             </select>
-            <button className="flex items-center gap-1.5 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-xs bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition">
+            <button className="flex items-center justify-center gap-1.5 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 md:py-1.5 text-xs bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition">
               <SlidersHorizontal size={14} />
               Filters
             </button>
@@ -129,7 +129,7 @@ export default function EnquiryManagement({ setView }) {
 
         {/* Data Table */}
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse text-xs">
+          <table className="w-full text-left border-collapse text-xs min-w-[900px]">
             <thead>
               <tr className="bg-slate-50/80 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-700/60 text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">
                 <th className="p-4 w-12">#</th>
@@ -202,9 +202,9 @@ export default function EnquiryManagement({ setView }) {
         </div>
 
         {/* Pagination Footer */}
-        <div className="p-4 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs">
+        <div className="p-4 border-t border-slate-200 dark:border-slate-700/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 dark:text-slate-400 text-xs">
           <span>Showing 1 to 6 of 245 entries</span>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <button className="p-1.5 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 disabled:opacity-50" disabled>
               <ChevronLeft size={14} />
             </button>
@@ -222,10 +222,10 @@ export default function EnquiryManagement({ setView }) {
 
       {/* View Enquiry Modal */}
       {selectedEnquiry && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg w-full max-w-md p-6 relative border border-slate-100 dark:border-slate-700">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg w-full max-w-md max-h-[90vh] overflow-y-auto p-5 sm:p-6 relative border border-slate-100 dark:border-slate-700">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-700 pb-3 mb-4">
-              <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Enquiry Details</h2>
+              <h2 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100">Enquiry Details</h2>
               <button
                 onClick={() => setSelectedEnquiry(null)}
                 className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold text-xl"
@@ -234,7 +234,7 @@ export default function EnquiryManagement({ setView }) {
               </button>
             </div>
 
-            <div className="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+            <div className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
               <p><strong className="text-slate-800 dark:text-slate-100">ID:</strong> {selectedEnquiry.id}</p>
               <p><strong className="text-slate-800 dark:text-slate-100">Name:</strong> {selectedEnquiry.name}</p>
               <p><strong className="text-slate-800 dark:text-slate-100">Contact:</strong> {selectedEnquiry.contact}</p>
@@ -249,7 +249,7 @@ export default function EnquiryManagement({ setView }) {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={() => setSelectedEnquiry(null)}
-                className="px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg font-medium transition"
+                className="w-full sm:w-auto px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg font-medium transition"
               >
                 Close
               </button>
@@ -260,10 +260,10 @@ export default function EnquiryManagement({ setView }) {
 
       {/* Edit Enquiry Modal */}
       {editingEnquiry && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg w-full max-w-lg p-6 relative border border-slate-100 dark:border-slate-700">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg w-full max-w-lg max-h-[90vh] overflow-y-auto p-5 sm:p-6 relative border border-slate-100 dark:border-slate-700">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-700 pb-3 mb-4">
-              <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Edit Enquiry ({editingEnquiry.id})</h2>
+              <h2 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100">Edit Enquiry ({editingEnquiry.id})</h2>
               <button
                 onClick={() => setEditingEnquiry(null)}
                 className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold text-xl"
@@ -290,7 +290,7 @@ export default function EnquiryManagement({ setView }) {
               }}
               className="space-y-4 text-xs text-slate-700 dark:text-slate-300"
             >
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-semibold text-slate-700 dark:text-slate-200">Name</label>
                   <input
@@ -311,7 +311,7 @@ export default function EnquiryManagement({ setView }) {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-semibold text-slate-700 dark:text-slate-200">Email</label>
                   <input
@@ -332,7 +332,7 @@ export default function EnquiryManagement({ setView }) {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
                   <label className="font-semibold text-slate-700 dark:text-slate-200">Source</label>
                   <input
@@ -366,17 +366,17 @@ export default function EnquiryManagement({ setView }) {
                 </div>
               </div>
 
-              <div className="mt-6 flex justify-end gap-2">
+              <div className="mt-6 flex flex-col-reverse sm:flex-row justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setEditingEnquiry(null)}
-                  className="px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg font-medium transition"
+                  className="w-full sm:w-auto px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg font-medium transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition"
+                  className="w-full sm:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition"
                 >
                   Save Changes
                 </button>
