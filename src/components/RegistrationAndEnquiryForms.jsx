@@ -88,13 +88,13 @@ export default function RegistrationAndEnquiryForms() {
   // 3. THE VISUAL SCREEN (UI)
   // ==========================================
   return (
-    <div className="p-6 bg-slate-50/50 dark:bg-slate-900 min-h-screen font-sans transition-colors">
-      <div className="mb-6 flex justify-between items-center">
+    <div className="p-4 sm:p-6 bg-slate-50/50 dark:bg-slate-900 min-h-screen font-sans transition-colors">
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800 dark:text-white">Student & Enquiry Registration</h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">Dashboard &gt; Unified Form Hub</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">Student & Enquiry Registration</h1>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Dashboard &gt; Unified Form Hub</p>
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs px-4 py-2 rounded-lg transition shadow-sm">
+        <button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs px-4 py-2 rounded-lg transition shadow-sm text-center">
           View All Records
         </button>
       </div>
@@ -104,7 +104,7 @@ export default function RegistrationAndEnquiryForms() {
         {/* ======================================= */}
         {/* LEFT COLUMN: Student Registration Form  */}
         {/* ======================================= */}
-        <div className="lg:col-span-7 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm p-5 space-y-6">
+        <div className="lg:col-span-7 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm p-4 sm:p-5 space-y-6">
           <div className="border-b border-slate-100 dark:border-slate-700 pb-3">
             <h2 className="text-base font-bold text-slate-800 dark:text-white">Student Registration Form</h2>
             <p className="text-xs text-slate-400 dark:text-slate-400 mt-0.5">Enter credentials and details to register a brand new student account.</p>
@@ -113,7 +113,7 @@ export default function RegistrationAndEnquiryForms() {
           <form onSubmit={handleStudentSubmit} className="space-y-5 text-xs text-slate-700 dark:text-slate-200">
             <div className="space-y-3">
               <h3 className="text-xs font-bold text-blue-600 dark:text-blue-400 tracking-wider uppercase">Personal Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="font-semibold text-slate-700 dark:text-slate-300">Full Name <span className="text-red-500">*</span></label>
                   <input name="fullName" type="text" required placeholder="Enter full name" className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 focus:outline-none focus:border-blue-500 text-xs" />
@@ -148,7 +148,7 @@ export default function RegistrationAndEnquiryForms() {
                 <label className="font-semibold text-slate-700 dark:text-slate-300">Address <span className="text-red-500">*</span></label>
                 <textarea name="address" required rows="2" placeholder="Enter full permanent/current address" className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 focus:outline-none focus:border-blue-500 text-xs"></textarea>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1">
                   <label className="font-semibold text-slate-700 dark:text-slate-300">City <span className="text-red-500">*</span></label>
                   <input name="city" type="text" required placeholder="Enter city" className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 focus:outline-none focus:border-blue-500 text-xs" />
@@ -166,8 +166,8 @@ export default function RegistrationAndEnquiryForms() {
 
             <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-700">
               <h3 className="text-xs font-bold text-blue-600 dark:text-blue-400 tracking-wider uppercase">Academic Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-                <div className="space-y-1 col-span-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div className="space-y-1">
                   <label className="font-semibold text-slate-700 dark:text-slate-300">Qualification <span className="text-red-500">*</span></label>
                   <select name="qualification" required className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 text-xs">
                     <option value="">Select</option>
@@ -175,15 +175,15 @@ export default function RegistrationAndEnquiryForms() {
                     <option value="Graduate">Graduate</option>
                   </select>
                 </div>
-                <div className="space-y-1 col-span-1">
+                <div className="space-y-1">
                   <label className="font-semibold text-slate-700 dark:text-slate-300">Stream / Branch</label>
                   <input name="stream" type="text" placeholder="e.g. CSE" className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 text-xs" />
                 </div>
-                <div className="space-y-1 col-span-1">
+                <div className="space-y-1">
                   <label className="font-semibold text-slate-700 dark:text-slate-300">Passing Year <span className="text-red-500">*</span></label>
                   <input name="passingYear" type="text" placeholder="e.g. 2024" className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 text-xs" />
                 </div>
-                <div className="space-y-1 col-span-1">
+                <div className="space-y-1">
                   <label className="font-semibold text-slate-700 dark:text-slate-300">Percentage / CGPA</label>
                   <input name="percentage" type="text" placeholder="e.g. 84%" className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 text-xs" />
                 </div>
@@ -192,7 +192,7 @@ export default function RegistrationAndEnquiryForms() {
 
             <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-700">
               <h3 className="text-xs font-bold text-blue-600 dark:text-blue-400 tracking-wider uppercase">Course Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <div className="space-y-1">
                   <label className="font-semibold text-slate-700 dark:text-slate-300">Select Course <span className="text-red-500">*</span></label>
                   <select name="course" required className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 text-xs">
@@ -226,7 +226,7 @@ export default function RegistrationAndEnquiryForms() {
 
             <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-700">
               <h3 className="text-xs font-bold text-blue-600 dark:text-blue-400 tracking-wider uppercase">Login Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="font-semibold text-slate-700 dark:text-slate-300">Password <span className="text-red-500">*</span></label>
                   <input name="password" type="password" required placeholder="Enter password" className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 text-xs" />
@@ -238,12 +238,12 @@ export default function RegistrationAndEnquiryForms() {
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-700">
-              <button type="reset" className="flex items-center gap-1.5 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 font-semibold transition">
+            <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-700">
+              <button type="reset" className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 font-semibold transition">
                 <RefreshCw size={14} />
                 Reset
               </button>
-              <button type="submit" className="flex items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-sm transition">
+              <button type="submit" className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-sm transition">
                 <CheckCircle size={14} />
                 Register Student
               </button>
@@ -255,14 +255,14 @@ export default function RegistrationAndEnquiryForms() {
         {/* ======================================= */}
         {/* RIGHT COLUMN: Enquiry Form Capture      */}
         {/* ======================================= */}
-        <div className="lg:col-span-5 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm p-5 space-y-6">
+        <div className="lg:col-span-5 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm p-4 sm:p-5 space-y-6">
           <div className="border-b border-slate-100 dark:border-slate-700 pb-3">
             <h2 className="text-base font-bold text-slate-800 dark:text-white">Quick Enquiry Capture</h2>
             <p className="text-xs text-slate-400 dark:text-slate-400 mt-0.5">Quickly log prospecting enquiries directly from leads or visits.</p>
           </div>
 
           <form onSubmit={handleEnquirySubmit} className="space-y-4 text-xs text-slate-700 dark:text-slate-200">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1">
                 <label className="font-semibold text-slate-700 dark:text-slate-300">Enquiry Source <span className="text-red-500">*</span></label>
                 <select name="source" required className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 text-xs">
@@ -283,7 +283,7 @@ export default function RegistrationAndEnquiryForms() {
               <input name="leadName" type="text" required placeholder="Enter lead name" className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 text-xs" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1">
                 <label className="font-semibold text-slate-700 dark:text-slate-300">Mobile Number <span className="text-red-500">*</span></label>
                 <input name="mobile" type="tel" required placeholder="Enter contact" className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 text-xs" />
@@ -294,7 +294,7 @@ export default function RegistrationAndEnquiryForms() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <div className="space-y-1">
                 <label className="font-semibold text-slate-700 dark:text-slate-300">Course Interested <span className="text-red-500">*</span></label>
                 <select name="course" required className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-1.5 text-xs">
@@ -327,7 +327,7 @@ export default function RegistrationAndEnquiryForms() {
               <textarea name="comments" rows="3" placeholder="Enter specialized demands or status notes" className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-2 text-xs"></textarea>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <div className="space-y-1">
                 <label className="font-semibold text-slate-700 dark:text-slate-300">Enquiry Status</label>
                 <select name="status" className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-lg p-1.5 text-xs">
@@ -353,11 +353,11 @@ export default function RegistrationAndEnquiryForms() {
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-700">
-              <button type="reset" className="flex items-center gap-1.5 px-3 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 font-semibold transition">
+            <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-700">
+              <button type="reset" className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 font-semibold transition">
                 Reset
               </button>
-              <button type="submit" className="flex items-center gap-1.5 px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold shadow-sm transition">
+              <button type="submit" className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold shadow-sm transition">
                 <Save size={14} />
                 Save Enquiry
               </button>

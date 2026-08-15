@@ -9,8 +9,7 @@ import {
   Settings,
   X,
   CheckCircle2,
-  AlertCircle,
-  ExternalLink
+  AlertCircle
 } from 'lucide-react';
 
 export default function Header({ currentUser, onSearchSubmit, onLogout }) {
@@ -22,9 +21,12 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
 
-  // Theme Toggle (Dark / Light)
+  // Theme Toggle (Dark / Light) with SSR Safety Check
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    return localStorage.getItem('theme') === 'dark';
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark';
+    }
+    return false;
   });
 
   // Dropdown Visibility States
@@ -69,6 +71,7 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
 
   // Refs for click outside handling & shortcut focus
   const searchInputRef = useRef(null);
+  const searchContainerRef = useRef(null);
   const notificationsRef = useRef(null);
   const profileRef = useRef(null);
 
@@ -89,6 +92,9 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
   // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
+        setIsSearchOpen(false);
+      }
       if (notificationsRef.current && !notificationsRef.current.contains(event.target)) {
         setIsNotificationsOpen(false);
       }
@@ -130,13 +136,11 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
 
     const timer = setTimeout(async () => {
       try {
-        // Query backend database for enquiries and students
         const response = await fetch(`http://localhost:5000/api/search?q=${encodeURIComponent(searchQuery)}`);
         if (response.ok) {
           const data = await response.json();
           setSearchResults(data);
         } else {
-          // Fallback search preview if endpoint isn't mounted yet
           setSearchResults([
             { id: 1, title: `Search for "${searchQuery}" in Students`, type: 'Student' },
             { id: 2, title: `Search for "${searchQuery}" in Enquiries`, type: 'Enquiry' }
@@ -172,13 +176,13 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
   // 6. UI RENDERING
   // ==========================================
   return (
-    <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 h-16 px-6 flex items-center justify-between sticky top-0 z-30 transition-colors">
+    <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 h-16 px-3 sm:px-6 flex items-center justify-between sticky top-0 z-30 transition-colors gap-2">
 
       {/* Search Bar Container */}
-      <div className="relative w-72 sm:w-96">
+      <div ref={searchContainerRef} className="relative flex-1 max-w-[200px] xs:max-w-[240px] sm:max-w-xs md:max-w-md">
         <div className="relative flex items-center">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
-            <Search size={18} />
+            <Search size={16} />
           </span>
           <input
             ref={searchInputRef}
@@ -186,8 +190,8 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => searchQuery.trim() && setIsSearchOpen(true)}
-            placeholder="Search students, enquiries, updates..."
-            className="w-full pl-10 pr-16 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-1 focus:ring-indigo-500 transition"
+            placeholder="Search..."
+            className="w-full pl-9 pr-8 sm:pr-16 py-1.5 sm:py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs sm:text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-1 focus:ring-indigo-500 transition"
           />
           {searchQuery ? (
             <button
@@ -195,12 +199,12 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
                 setSearchQuery('');
                 setIsSearchOpen(false);
               }}
-              className="absolute right-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+              className="absolute right-2 sm:right-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
             >
               <X size={16} />
             </button>
           ) : (
-            <span className="absolute inset-y-0 right-3 flex items-center text-[10px] font-semibold text-slate-400 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded px-1.5 py-0.5 my-2 shadow-xs pointer-events-none">
+            <span className="hidden md:flex absolute inset-y-0 right-3 items-center text-[10px] font-semibold text-slate-400 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded px-1.5 py-0.5 my-2 shadow-xs pointer-events-none">
               Ctrl + K
             </span>
           )}
@@ -208,7 +212,7 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
 
         {/* Search Results Dropdown Popover */}
         {isSearchOpen && (
-          <div className="absolute left-0 right-0 mt-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl overflow-hidden z-50 max-h-80 overflow-y-auto">
+          <div className="absolute left-0 right-0 mt-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl overflow-hidden z-50 max-h-80 overflow-y-auto w-[calc(100vw-2rem)] sm:w-full max-w-md">
             {isSearching ? (
               <div className="p-4 text-center text-xs text-slate-400">Searching database...</div>
             ) : searchResults.length > 0 ? (
@@ -225,10 +229,10 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
                     }}
                     className="px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer flex items-center justify-between transition"
                   >
-                    <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
+                    <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 truncate pr-2">
                       {result.title || result.name}
                     </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 font-semibold">
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 font-semibold shrink-0">
                       {result.type || 'Record'}
                     </span>
                   </div>
@@ -242,13 +246,13 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
       </div>
 
       {/* Right Navigation Controls */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1.5 sm:gap-3">
 
         {/* Theme Toggle Button */}
         <button
           onClick={toggleDarkMode}
           title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-          className="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-full transition"
+          className="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 p-1.5 sm:p-2 rounded-full transition"
         >
           {isDarkMode ? <Sun size={18} className="text-amber-400" /> : <Moon size={18} />}
         </button>
@@ -257,7 +261,7 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
         <div className="relative" ref={notificationsRef}>
           <button
             onClick={() => setIsNotificationsOpen((prev) => !prev)}
-            className="relative text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-full transition"
+            className="relative text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 p-1.5 sm:p-2 rounded-full transition"
           >
             <Bell size={18} />
             {unreadCount > 0 && (
@@ -266,10 +270,10 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
           </button>
 
           {isNotificationsOpen && (
-            <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl overflow-hidden z-50">
+            <div className="absolute right-[-40px] sm:right-0 mt-2 w-72 sm:w-80 max-w-[calc(100vw-1.5rem)] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl overflow-hidden z-50">
               <div className="p-3.5 border-b border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">Notifications</h4>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">Notifications</h4>
                   {unreadCount > 0 && (
                     <span className="bg-indigo-100 dark:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 text-[10px] font-bold px-2 py-0.5 rounded-full">
                       {unreadCount} new
@@ -323,22 +327,22 @@ export default function Header({ currentUser, onSearchSubmit, onLogout }) {
         </div>
 
         {/* User Profile Menu Dropdown */}
-        <div className="relative border-l pl-4 border-slate-200 dark:border-slate-700" ref={profileRef}>
+        <div className="relative border-l pl-2 sm:pl-4 border-slate-200 dark:border-slate-700" ref={profileRef}>
           <button
             onClick={() => setIsProfileOpen((prev) => !prev)}
-            className="flex items-center gap-3 hover:opacity-80 transition focus:outline-none"
+            className="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition focus:outline-none"
           >
             <div className="text-right hidden sm:block">
               <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 leading-tight">{user.name}</p>
               <p className="text-xs text-slate-500 dark:text-slate-400">{user.role}</p>
             </div>
-            <div className="w-10 h-10 bg-gradient-to-tr from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm ring-2 ring-white dark:ring-slate-800">
-              {user.initials || user.name?.slice(0, 2).toUpperCase()}
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-tr from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm shadow-sm ring-2 ring-white dark:ring-slate-800">
+              {user.initials || user.name?.slice(0, 2)?.toUpperCase()}
             </div>
           </button>
 
           {isProfileOpen && (
-            <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl overflow-hidden z-50 py-1">
+            <div className="absolute right-0 mt-2 w-48 sm:w-56 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl overflow-hidden z-50 py-1">
               <div className="px-4 py-2.5 border-b border-slate-100 dark:border-slate-700">
                 <p className="text-xs font-semibold text-slate-800 dark:text-slate-100">{user.name}</p>
                 <p className="text-[11px] text-slate-400 truncate">{user.email}</p>
