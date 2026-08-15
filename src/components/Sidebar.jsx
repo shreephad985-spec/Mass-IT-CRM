@@ -28,21 +28,21 @@ export default function Sidebar({ currentView, setView, isOpen = false, onClose 
 
   return (
     <>
-      {/* Mobile Backdrop Overlay */}
+      {/* 1. Mobile Backdrop Blur */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-40 lg:hidden transition-opacity"
+          className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-40 lg:hidden"
           onClick={onClose}
         />
       )}
 
-      {/* Sidebar Drawer */}
+      {/* 2. Floating Mobile Overlay Sidebar / Normal Desktop Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-400 h-screen p-4 flex flex-col justify-between font-sans transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
       >
         <div className="flex flex-col h-full overflow-hidden">
-          {/* Header & Close Button */}
+          {/* Header & Mobile Close Button */}
           <div className="flex items-center justify-between mb-6 px-2 shrink-0">
             <div className="flex items-center gap-2">
               <div className="bg-gradient-to-r from-[#0b0f5a] to-[#b10019] text-white font-bold p-2 rounded text-xl italic tracking-wider">
@@ -53,7 +53,6 @@ export default function Sidebar({ currentView, setView, isOpen = false, onClose 
               </span>
             </div>
 
-            {/* Mobile Close Button */}
             <button
               onClick={onClose}
               className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
@@ -63,8 +62,8 @@ export default function Sidebar({ currentView, setView, isOpen = false, onClose 
             </button>
           </div>
 
-          {/* Scrollable Navigation */}
-          <nav className="space-y-4 overflow-y-auto pr-1 flex-1 scrollbar-thin scrollbar-thumb-slate-700">
+          {/* Nav Items */}
+          <nav className="space-y-4 overflow-y-auto pr-1 flex-1">
             <button
               onClick={() => handleItemClick('dashboard')}
               className={`w-full flex items-center gap-3 px-3 py-2 rounded text-sm font-medium transition ${currentView === 'dashboard'
@@ -112,7 +111,7 @@ export default function Sidebar({ currentView, setView, isOpen = false, onClose 
             ))}
           </nav>
 
-          {/* Fixed Footer Upgrade Card */}
+          {/* Bottom Upgrade Card */}
           <div className="bg-gradient-to-r from-blue-900 to-zinc-950 p-4 rounded-xl border border-blue-800 mt-4 shrink-0">
             <div className="flex items-center gap-2 text-white font-semibold text-sm mb-1">
               <Crown size={16} className="text-yellow-400" />
