@@ -8,6 +8,7 @@ import ReportsPage from './components/report';
 export default function App() {
   // Sets the initial dashboard view panel state
   const [currentView, setView] = useState('enquiry');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Handles smooth template switching across modules
   const renderView = () => {
@@ -25,17 +26,36 @@ export default function App() {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-200">
-      {/* Structural Module Routing Navigation */}
-      <Sidebar currentView={currentView} setView={setView} />
+    <div className="flex h-screen overflow-hidden bg-slate-100 dark:bg-slate-900">
+      {/* 1. Sidebar with mobile state props */}
+      <Sidebar
+        currentView={currentView}
+        setView={setCurrentView}
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
 
-      {/* Primary Content Grid Block Workspace */}
-      <div className="flex-1 flex flex-col min-w-0">
-        <Header />
-        <main className="flex-1 overflow-y-auto">
-          {renderView()}
+      {/* 2. Main content container */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+
+        {/* Mobile Header Bar (Only visible on small screens) */}
+        <header className="flex items-center gap-3 px-4 py-3 bg-slate-900 border-b border-slate-800 lg:hidden">
+          <button
+            onClick={() => setIsSidebarOpen(true)}
+            className="p-2 rounded-lg text-slate-300 hover:bg-slate-800 focus:outline-none"
+            aria-label="Open navigation menu"
+          >
+            <Menu size={24} />
+          </button>
+          <span className="text-white font-bold tracking-wide text-sm">MASS IT SOLUTIONS</span>
+        </header>
+
+        {/* Page Content */}
+        <main className="p-4 sm:p-6">
+          <h1 className="text-xl font-bold text-slate-800 dark:text-white capitalize">{currentView}</h1>
         </main>
       </div>
     </div>
   );
 }
+
