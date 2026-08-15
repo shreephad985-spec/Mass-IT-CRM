@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu } from 'lucide-react'; // Added missing Menu import
+import { Menu } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import EnquiryManagement from './components/EnquiryManagement';
@@ -7,11 +7,9 @@ import RegistrationAndEnquiryForms from './components/RegistrationAndEnquiryForm
 import ReportsPage from './components/report';
 
 export default function App() {
-  // Sets the initial dashboard view panel state
   const [currentView, setView] = useState('enquiry');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // Handles smooth template switching across modules
   const renderView = () => {
     switch (currentView) {
       case 'enquiry':
@@ -27,8 +25,8 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-slate-100 dark:bg-slate-900">
-      {/* 1. Sidebar with mobile state props */}
+    <div className="flex h-screen w-full overflow-hidden bg-slate-100 dark:bg-slate-900 relative">
+      {/* 1. Sidebar with mobile toggle props */}
       <Sidebar
         currentView={currentView}
         setView={setView}
@@ -38,13 +36,7 @@ export default function App() {
 
       {/* 2. Main content container */}
       <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-
-        {/* Desktop Header */}
-        <div className="hidden lg:block">
-          <Header />
-        </div>
-
-        {/* Mobile Header Bar (Only visible on small screens) */}
+        {/* Mobile Header Bar with Hamburger Button */}
         <header className="flex items-center gap-3 px-4 py-3 bg-slate-900 border-b border-slate-800 lg:hidden shrink-0">
           <button
             onClick={() => setIsSidebarOpen(true)}
@@ -55,6 +47,11 @@ export default function App() {
           </button>
           <span className="text-white font-bold tracking-wide text-sm">MASS IT SOLUTIONS</span>
         </header>
+
+        {/* Desktop Header Component */}
+        <div className="hidden lg:block">
+          <Header />
+        </div>
 
         {/* Page Content */}
         <main className="flex-1 overflow-y-auto p-4 sm:p-6">

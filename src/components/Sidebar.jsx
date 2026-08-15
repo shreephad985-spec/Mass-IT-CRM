@@ -28,7 +28,7 @@ export default function Sidebar({ currentView, setView, isOpen = false, onClose 
 
   return (
     <>
-      {/* 1. Mobile Backdrop Blur */}
+      {/* Dark overlay backdrop on mobile when sidebar is open */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-40 lg:hidden"
@@ -36,7 +36,7 @@ export default function Sidebar({ currentView, setView, isOpen = false, onClose 
         />
       )}
 
-      {/* 2. Floating Mobile Overlay Sidebar / Normal Desktop Sidebar */}
+      {/* Floating mobile sidebar drawer / Inline desktop sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-400 h-screen p-4 flex flex-col justify-between font-sans transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
@@ -53,6 +53,7 @@ export default function Sidebar({ currentView, setView, isOpen = false, onClose 
               </span>
             </div>
 
+            {/* Close Button for Mobile */}
             <button
               onClick={onClose}
               className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
